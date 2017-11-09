@@ -20,6 +20,8 @@ action_sample：样本集合的动作集，二维数组
 reward_sample：样本集合的奖励集，二维数组
 输出——
 各个状态的状态价值
+
+其中，每一个agent从开始到结束产生状态集、动作集、奖励集，被称为一个产生episode（分段）
 '''
 def mc(gamma, state_sample, action_sample, reward_sample):   
     vfunc = dict();
@@ -42,7 +44,7 @@ def mc(gamma, state_sample, action_sample, reward_sample):
             G *= gamma;
             G += reward_sample[iter1][step];
 
-        #正序计算，根据第一个动作的价值，以及每次动作的奖励、衰减系数，反算后续动作的价值
+        #正序计算，根据第一个动作的价值，以及每次动作的奖励、衰减系数，反算后续状态的价值
         for step in xrange(len(state_sample[iter1])):
             s         = state_sample[iter1][step]
             vfunc[s] += G;
