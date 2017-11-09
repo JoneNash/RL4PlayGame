@@ -1,10 +1,7 @@
 ======================
-http://www.algorithmdog.com/rl-policy-gradient
+策略梯度
 ======================
 
-Requirements
----------------
- -numpy
- -matplotlib-1.5.0
-
+第五部分介绍的价值函数近似，用模型拟合价值函数。
+接下来要说的梯度策略，用模型直接拟合策略。
 
