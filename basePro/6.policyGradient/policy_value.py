@@ -1,6 +1,5 @@
 #!/bin/python
 import sys
-sys.path.append("./secret")
 
 import grid_mdp
 import random
