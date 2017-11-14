@@ -105,3 +105,9 @@ def sarsa(grid, evaler, softmaxpolicy, valuepolicy, num_iter1, alpha):
     return softmaxpolicy, y;
 
 
+def qlearning():
+    return None
+
+
+
+

@@ -1,13 +1,16 @@
 #!/bin/python
+#coding=utf-8
 import sys
 sys.path.append("./secret")
 import random
 random.seed(10)
 import matplotlib.pyplot as plt
-from gradient         import *
+import  gradient
 from policy_value     import *
 from grid_mdp         import *
 from evaluate         import *
+
+
 
 if __name__ == "__main__":
 
@@ -17,9 +20,10 @@ if __name__ == "__main__":
     grid            = Grid_Mdp();
     softmaxpolicy   = SoftmaxPolicy(grid, epsilon = 0.01);
     valuepolicy     = ValuePolicy(grid, epsilon = 0.01);
+    #q误差（最佳q(s,a)与q(s-hat,a)的差值）平方和
     evaler          = Evaler(grid);
 
-    softmaxpolicy, y = sarsa(grid, evaler, softmaxpolicy, valuepolicy, 2000, 0.01)
+    softmaxpolicy, y = gradient.sarsa(grid, evaler, softmaxpolicy, valuepolicy, 2000, 0.01)
     plt.plot(y, "-", label="sarsa");        
     
 

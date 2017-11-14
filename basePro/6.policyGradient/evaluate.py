@@ -1,9 +1,12 @@
 #!/bin/python
+#coding=utf-8
 import sys
 sys.path.append("./secret");
 from grid_mdp import *
 
 ###############  Compute the gaps between current q and the best q ######
+
+#最佳q(s,a)存储在./eval.data
 class Evaler:
     def __init__(self, grid):
         self.grid = grid

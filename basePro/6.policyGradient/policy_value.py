@@ -1,4 +1,5 @@
 #!/bin/python
+#coding=utf-8
 import sys
 
 import grid_mdp
@@ -12,6 +13,7 @@ class SoftmaxPolicy:
         self.actions = grid.actions
 
         grid.start();
+        #转移后的状态是否是terminal状态，转移后的状态特征，奖励
         t,hats,r = grid.receive(self.actions[0]);
         self.theta = [ 0.0  for i in xrange(len(hats)*len(self.actions)) ]
         self.theta = np.array(self.theta);
