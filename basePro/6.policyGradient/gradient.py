@@ -1,4 +1,5 @@
 #/bin/python
+#coding=utf-8
 import sys
 sys.path.append("./secret")
 
@@ -15,6 +16,11 @@ def update_valuepolicy(valuepolicy, f, a, tvalue, alpha):
     fea           = valuepolicy.get_fea_vec(f, a);
     valuepolicy.theta -= alpha * error * fea;     
 
+# policy 待更新的策略
+# f      状态特征
+# a      动作
+# qvalue q值
+# alpha  学习率
 def update_softmaxpolicy(softmaxpolicy, f, a, qvalue, alpha):
 
     fea  = softmaxpolicy.get_fea_vec(f,a);
@@ -30,7 +36,7 @@ def update_softmaxpolicy(softmaxpolicy, f, a, qvalue, alpha):
     softmaxpolicy.theta -= alpha * delta_logJ * qvalue; 
 
 ################ Different model free RL learning algorithms #####
-def mc(grid,softmaxpolicy, num_iter1, alpha):
+def mc(grid,policy, num_iter1, alpha):
     actions = grid.actions;
     gamma   = grid.gamma;
     for i in xrange(len(policy.theta)):
@@ -46,7 +52,7 @@ def mc(grid,softmaxpolicy, num_iter1, alpha):
         t = False
         count = 0
         while False == t and count < 100:
-            a = softmaxpolicy.take_action(f)
+            a = policy.take_action(f)
             t, f1, r  = grid.receive(a)
             f_sample.append(f)
             r_sample.append(r)
@@ -61,13 +67,13 @@ def mc(grid,softmaxpolicy, num_iter1, alpha):
             g += r_sample[i];
         
         for i in xrange(len(f_sample)):
-            update_softmaxpolicy(solftmaxpolicy, f_sample[i], a_sample[i], g, alpha)
+            update_softmaxpolicy(policy, f_sample[i], a_sample[i], g, alpha)
 
             g -= r_sample[i];
             g /= gamma;
         
 
-    return softmaxpolicy
+    return policy
 
 def sarsa(grid, evaler, softmaxpolicy, valuepolicy, num_iter1, alpha):
     actions = grid.actions;
