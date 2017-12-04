@@ -5,27 +5,29 @@ import random;
 
 class Mdp:
 
+
+    #初始化
     def __init__(self):
 
-        #状态
+        #1.状态
         self.states         = [1,2,3,4,5,6,7,8] # 0 indicates end
 
-        #
+        #（终止状态）
         self.terminal_states      = dict()
         self.terminal_states[6]   = 1
         self.terminal_states[7]   = 1
         self.terminal_states[8]   = 1
 
-        #动作
+        #2.动作
         self.actions        = ['n','e','s','w']
 
-        #奖励：R_s,a 表示状态 s 下采取动作 a 获得的奖励
+        #3.奖励：R_s,a 表示状态 s 下采取动作 a 获得的奖励
         self.rewards        = dict();
         self.rewards['1_s'] = -1.0
         self.rewards['3_s'] = 1.0
         self.rewards['5_s'] = -1.0
 
-        #状态转移概率（字典）
+        #4.状态转移概率（字典）
         #也可以看做状态转移概率，P-s′_s,a 表示状态 s 下采取动作 a 之后转移到 s' 状态的概率
         #这里，转移概率都是100%
         self.t              = dict();
@@ -41,11 +43,11 @@ class Mdp:
         self.t['5_s']       = 8 
         self.t['5_w']       = 4
 
-        #衰减因子
+        #5.衰减因子
         self.gamma          = 0.8
 
     #状态转移
-    #返回一下个状态的信息（是否是最终状态，状态编号，奖励）
+    #返回下一个状态的信息（是否是最终状态，状态编号，奖励）
     def transform(self, state, action): ##return is_terminal,state, reward
         #当前状态为最终状态
         if state in self.terminal_states:
