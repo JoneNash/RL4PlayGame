@@ -13,7 +13,6 @@
 
 ## 如何执行？
 ```
-cd DeepLearningFlappyBird
 python deep_q_network.py
 ```
 
